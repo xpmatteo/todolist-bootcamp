@@ -22,8 +22,8 @@ public class ReusableJettyApp {
 		server = new Server(port);
 		try {
 			HandlerList handlers = new HandlerList();
-			handlers.setHandlers(new Handler[] { resourceHandler(resourceBase),
-					servletHandler(), new DefaultHandler() });
+			handlers.setHandlers(new Handler[] {
+					resourceHandler(resourceBase), servletHandler(), new DefaultHandler() });
 			server.setHandler(handlers);
 			server.start();
 		} catch (Exception e) {
@@ -32,17 +32,9 @@ public class ReusableJettyApp {
 	}
 
 	protected ResourceHandler resourceHandler(String resourceBase) {
-		ResourceHandler resourceHandler = new ResourceHandler() {
-			@Override
-			public void handle(String target, HttpServletRequest request, HttpServletResponse response, int dispatch) throws IOException, ServletException {
-				if (request.getPathInfo().equals("/")) {
-					((Request) request).setHandled(false);					
-				} else {
-					super.handle(target, request, response, dispatch);
-				}
-			}
-		};
-		resourceHandler.setResourceBase(resourceBase);		
+		ResourceHandler resourceHandler = new ResourceHandler();
+		resourceHandler.setWelcomeFiles(new String[]{ "index.html" });
+		resourceHandler.setResourceBase(resourceBase);
 		return resourceHandler;
 	}
 
