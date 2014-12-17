@@ -10,7 +10,7 @@ public class ToDoListJsonSerializer {
 		this.toDoList = toDoList;
 	}
 
-	public String toString() {
+	public String serialize() {
 		return new Gson().toJson(toDoList);
 	}
 }

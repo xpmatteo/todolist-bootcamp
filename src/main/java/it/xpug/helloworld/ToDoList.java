@@ -33,4 +33,8 @@ public class ToDoList {
 	public void addToDo(String text) {
 		toDos.add(new Todo(text));
 	}
+	
+	public void addToDo(Todo todo){
+		toDos.add(todo);
+	}
 }
