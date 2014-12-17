@@ -6,7 +6,7 @@ import java.util.List;
 public class ToDoList {
 
 	private String title;
-	private List<String> toDos = new ArrayList<String>();
+	private List<Todo> toDos = new ArrayList<Todo>();
 
 	public static ToDoList newDefaultToDoList() {
 		ToDoList toDoList = new ToDoList("Titolo della lista");
@@ -26,11 +26,11 @@ public class ToDoList {
 		return title;
 	}
 
-	public List<String> getToDoList() {
+	public List<Todo> getToDoList() {
 		return toDos;
 	}
 
-	public void addToDo(String toDo) {
-		toDos.add(toDo);
+	public void addToDo(String text) {
+		toDos.add(new Todo(text));
 	}
 }

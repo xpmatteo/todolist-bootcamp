@@ -19,7 +19,7 @@ public class ToDoListJsonSerializerTest {
 		ToDoListJsonSerializer jsonSerializer = new ToDoListJsonSerializer(toDoList);
 
 		assertEquals(
-				"{\"title\":\"Titolo della lista\",\"toDos\":[\"Fai questo\",\"Quello\",\"e quell\\u0027altro\"]}",
+				"{\"title\":\"Titolo della lista\",\"toDos\":[{\"text\":\"Fai questo\"},{\"text\":\"Quello\"},{\"text\":\"e quell\\u0027altro\"}]}",
 				jsonSerializer.toString());
 	}
 
