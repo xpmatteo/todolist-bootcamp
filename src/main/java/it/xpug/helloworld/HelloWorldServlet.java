@@ -15,7 +15,7 @@ public class HelloWorldServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getToDoList(request, response);
+		getToDoListAndWriteToResponse(request, response);
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class HelloWorldServlet extends HttpServlet {
 		addToDo(request, response);
 	}
 
-	private void getToDoList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void getToDoListAndWriteToResponse(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ToDoListJsonSerializer serializer = new ToDoListJsonSerializer(toDoList);
 
 		response.setContentType("application/json");
@@ -36,6 +36,6 @@ public class HelloWorldServlet extends HttpServlet {
 		String json = String.format("{\"text\":\"%s\"}", request.getParameter("toDoText"));
 		toDoList.addToDo(new ToDoJsonSerializer(json).deserialize());
 
-		getToDoList(request, response);
+		getToDoListAndWriteToResponse(request, response);
 	}
 }

@@ -8,6 +8,6 @@ public class ToDoJsonSerializerTest {
 
 	@Test
 	public void testJsonDeserialization() {
-		assertEquals(new Todo("Qualcosa"), new ToDoJsonSerializer("{\"text\":\"Qualcosa\"}").deserialize());
+		assertEquals(new ToDo("Qualcosa"), new ToDoJsonSerializer("{\"text\":\"Qualcosa\"}").deserialize());
 	}
 }
