@@ -1,6 +1,6 @@
 package it.xpug.helloworld;
 
-import it.xpug.toolkit.http.*;
+import it.xpug.toolkit.http.ReusableJettyApp;
 
 
 public class Main {
