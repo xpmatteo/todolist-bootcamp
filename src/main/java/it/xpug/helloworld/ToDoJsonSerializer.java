@@ -10,7 +10,7 @@ public class ToDoJsonSerializer {
 		this.json = json;
 	}
 
-	public Todo deserialize() {
-		return new Gson().fromJson(json, Todo.class);
+	public ToDo deserialize() {
+		return new Gson().fromJson(json, ToDo.class);
 	}
 }

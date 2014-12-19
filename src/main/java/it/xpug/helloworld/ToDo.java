@@ -1,9 +1,9 @@
 package it.xpug.helloworld;
 
-public class Todo {
+public class ToDo {
 	private String text;
 
-	public Todo(String text) {
+	public ToDo(String text) {
 		this.text = text;
 	}
 
@@ -27,7 +27,7 @@ public class Todo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Todo other = (Todo) obj;
+		ToDo other = (ToDo) obj;
 		if (text == null) {
 			if (other.text != null)
 				return false;
