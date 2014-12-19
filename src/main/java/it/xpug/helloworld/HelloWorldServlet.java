@@ -15,7 +15,19 @@ public class HelloWorldServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getToDoListAndWriteToResponse(request, response);
+		String uri = request.getRequestURI();
+		String[] uriParts = uri.split("/");
+		if (isRootRequested(uriParts)) {
+			redirectToIndex(response);
+		}
+		else if (isToDoListsRequested(uriParts)) {
+			if (isToDoListIdRequested(uriParts)) {
+				getToDoListAndWriteToResponse(new Long(uriParts[2]), response);
+			}
+		}
+		else {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+		}
 	}
 
 	@Override
@@ -23,7 +35,23 @@ public class HelloWorldServlet extends HttpServlet {
 		addToDo(request, response);
 	}
 
-	private void getToDoListAndWriteToResponse(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private boolean isRootRequested(String[] uriParts) {
+		return uriParts.length < 2;
+	}
+
+	private void redirectToIndex(HttpServletResponse response) throws IOException {
+		response.sendRedirect("index.html");
+	}
+
+	private boolean isToDoListIdRequested(String[] uriParts) {
+		return uriParts.length > 2;
+	}
+
+	private boolean isToDoListsRequested(String[] uriParts) {
+		return "todolists".equals(uriParts[1]);
+	}
+
+	private void getToDoListAndWriteToResponse(long id, HttpServletResponse response) throws IOException {
 		ToDoListJsonSerializer serializer = new ToDoListJsonSerializer(toDoList);
 
 		response.setContentType("application/json");
@@ -36,6 +64,6 @@ public class HelloWorldServlet extends HttpServlet {
 		String json = String.format("{\"text\":\"%s\"}", request.getParameter("toDoText"));
 		toDoList.addToDo(new ToDoJsonSerializer(json).deserialize());
 
-		getToDoListAndWriteToResponse(request, response);
+		getToDoListAndWriteToResponse(1, response);
 	}
 }
