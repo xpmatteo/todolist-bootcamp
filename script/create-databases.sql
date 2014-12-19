@@ -33,7 +33,7 @@ echo "grant all on $dbname.* to '$dbuser'@localhost identified by '$dbpassword';
 echo "grant all on $dbname_test.* to '$dbuser'@localhost identified by '$dbpassword';" | do_mysql
 echo "$dbuser authorized"
 
-#cat $src/*.sql | mysql -u$dbuser -p$dbpassword $dbname
-#cat $src/*.sql | mysql -u$dbuser -p$dbpassword $dbname_test
+cat $src/*.sql | mysql -u$dbuser -p$dbpassword $dbname
+cat $src/*.sql | mysql -u$dbuser -p$dbpassword $dbname_test
 echo "schema loaded"
 

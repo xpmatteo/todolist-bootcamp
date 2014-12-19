@@ -1,0 +1,18 @@
+DROP TABLE IF EXISTS to_do_list;
+
+CREATE TABLE to_do_list (
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(255)
+	);
+	
+
+DROP TABLE IF EXISTS to_do;
+	
+CREATE TABLE to_do (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	title VARCHAR(255),
+	list_id INT NOT NULL,
+	FOREIGN KEY fk_list_id(list_id)
+	REFERENCES to_do_list(id)
+	ON DELETE CASCADE
+	);
