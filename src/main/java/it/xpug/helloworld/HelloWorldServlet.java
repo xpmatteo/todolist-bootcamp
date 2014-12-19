@@ -32,7 +32,19 @@ public class HelloWorldServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		addToDo(request, response);
+		String uri = request.getRequestURI();
+		String[] uriParts = uri.split("/");
+		if (isRootRequested(uriParts)) {
+			redirectToIndex(response);
+		}
+		else if (isToDoListsRequested(uriParts)) {
+			if (isToDoListIdRequested(uriParts)) {
+				addToDo(new Long(uriParts[2]), request, response);
+			}
+		}
+		else {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+		}
 	}
 
 	private boolean isRootRequested(String[] uriParts) {
@@ -60,7 +72,7 @@ public class HelloWorldServlet extends HttpServlet {
 		writer.close();
 	}
 
-	private void addToDo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void addToDo(long toDoListId, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String json = String.format("{\"text\":\"%s\"}", request.getParameter("toDoText"));
 		toDoList.addToDo(new ToDoJsonSerializer(json).deserialize());
 
