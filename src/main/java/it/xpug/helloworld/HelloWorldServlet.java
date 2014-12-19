@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class HelloWorldServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -4196202522268353783L;
-	private static final ToDoList toDoList = ToDoList.newDefaultToDoList();
+	private static final ToDoList toDoList = new ToDoList("Titolo della lista");
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
