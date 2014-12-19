@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoList {
-
+	private long id;
 	private String title;
 	private List<ToDo> toDos = new ArrayList<ToDo>();
 
@@ -20,6 +20,14 @@ public class ToDoList {
 
 	public ToDoList(String title) {
 		this.title = title;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	public String getTitle() {
