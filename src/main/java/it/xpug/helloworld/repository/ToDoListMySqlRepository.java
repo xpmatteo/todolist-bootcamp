@@ -10,34 +10,22 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class ToDoListMySqlRepository implements ToDoListRepository {
 
 	private final Databases database;
 	private Connection connection;
 
-	private PreparedStatement prepareStatement(Object... objects)
-			throws SQLException {
-		PreparedStatement statement = connection
-				.prepareStatement((String) objects[0]);
-
-		for (int i = 1; i < objects.length; i++) {
-			statement.setObject(i, objects[i]);
-		}
-
-		return statement;
-	}
-
 	public ToDoListMySqlRepository() {
 		this.database = Databases.DEVELOPMENT;
-
 	}
 
 	public ToDoListMySqlRepository(Databases database) {
 		this.database = database;
-
 	}
 
 	@Override
@@ -46,18 +34,15 @@ public class ToDoListMySqlRepository implements ToDoListRepository {
 		connect();
 
 		disconnect();
-
 	}
 
 	@Override
 	public ToDoList findById(long id) {
-
 		return null;
 	}
 
 	public void connect() throws SQLException {
-		connection = DriverManager
-				.getConnection(database.getConnectionString());
+		connection = DriverManager.getConnection(database.getConnectionString());
 	}
 
 	public void disconnect() throws SQLException {
@@ -67,58 +52,39 @@ public class ToDoListMySqlRepository implements ToDoListRepository {
 	}
 
 	public boolean isConnected() throws SQLException {
-		return connection != null && !connection.isClosed();
-
+		return connection != null && ! connection.isClosed();
 	}
 
 	public Object selectOneValue(Object... objects) throws SQLException {
 		connect();
 
-		PreparedStatement statement = prepareStatement(objects);
-
-		ResultSet resultSet = statement.executeQuery();
-
-		resultSet.next();
-
-		Object resultValue = resultSet.getObject(1);
+		Iterator<Entry<String, Object>> iterator = select(objects).get(0).entrySet().iterator();
+		Object resultValue = (iterator.hasNext() ? iterator.next().getValue() : null);
 
 		disconnect();
 
 		return resultValue;
-
 	}
 
 	public void execute(Object... objects) throws SQLException {
 		connect();
-
-		PreparedStatement statement = prepareStatement(objects);
-
-		statement.execute();
-
+		prepareStatement(objects).execute();
 		disconnect();
-
 	}
 
-	public List<?> select(String string) throws SQLException {
+	public List<Map<String, Object>> select(Object... objects) throws SQLException {
 		connect();
 
-		PreparedStatement statement = prepareStatement(string);
-
-		ResultSet resultSet = statement.executeQuery();
-		List<Object> selectedValues = new ArrayList<Object>();
-
+		ResultSet resultSet = prepareStatement(objects).executeQuery();
 		ResultSetMetaData metaData = resultSet.getMetaData();
+		List<Map<String, Object>> selectedValues = new ArrayList<Map<String, Object>>();
 
 		while (resultSet.next()) {
 			Map<String, Object> entriesByColumnName = new HashMap<String, Object>();
-
-			for (int i = 1; i < metaData.getColumnCount(); i++) {
-				entriesByColumnName.put(metaData.getColumnName(i),
-						resultSet.getObject(i));
+			for (int i = 1; i <= metaData.getColumnCount(); i++) {
+				entriesByColumnName.put(metaData.getColumnLabel(i), resultSet.getObject(i));
 			}
-
 			selectedValues.add(entriesByColumnName);
-
 		}
 
 		disconnect();
@@ -126,4 +92,13 @@ public class ToDoListMySqlRepository implements ToDoListRepository {
 		return selectedValues;
 	}
 
+	private PreparedStatement prepareStatement(Object... objects) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement((String) objects[0]);
+
+		for (int i = 1; i < objects.length; i++) {
+			statement.setObject(i, objects[i]);
+		}
+
+		return statement;
+	}
 }
