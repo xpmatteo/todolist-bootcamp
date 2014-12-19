@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS to_do;
 	
 CREATE TABLE to_do (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	title VARCHAR(255),
+	text VARCHAR(255),
 	list_id INT NOT NULL,
 	FOREIGN KEY fk_list_id(list_id)
 	REFERENCES to_do_list(id)
