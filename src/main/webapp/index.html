@@ -9,41 +9,48 @@
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <h3 class="text-muted">TO-DO List App</h3>
-    </div>
-
     <div class="row">
-        <div class="col-lg-12 containerList">
-            <!--script id="toDoListTpl" type="text/template"-->
-                <div class="jumbotron">
-                    <h3>Titolo della lista</h3>
-                </div>
-                <ul class="wrpListToDo">
-                    <li><input type="checkbox" name="" value="">Fai Questo</input></li>
-                    <li><input type="checkbox" name="" value="">Quello</input></li>
-                    <li><input type="checkbox" name="" value="">e quell'altro</input></li>
-                </ul>
-            <!-- /script -->
-            <!--<script id="toDoListTpl" type="text/template">
-                <h1>{{title}}</h1>
-                <ul>
-                    <li>
-                        <input type="checkbox" name="" value="">{{toDoItem}}</input>
-                    </li>
-                </ul>
-            </script>-->
-        </div>
+        <div class="col-lg-12" id="containerList"></div>
 
+    </div>
+    <div class="row">
+        <form id="formToDo">
+            <input id="toDoText" name="toDoText" type="text" class="form-control" placeholder="To-do text">
+            <button type="button" id="addToDo" class="btn btn-default navbar-btn">Add this item</button>
+        </form>
     </div>
 
     <footer class="footer">
         <p>&copy; Team Bootcamp 2014</p>
     </footer>
+
+    <script id="toDoListTpl" type="text/template">
+        <h3>{{title}}</h3>
+        <ul class="wrpListToDo">
+            {{#toDos}}
+            <li>
+                <div>
+                    <input id ="{{text}}" class="checkbox" type="checkbox" name="{{text}}" value="{{text}}">
+                    <label for="{{text}}">{{text}}</label>
+                </div>
+            </li>
+            {{/toDos}}
+            <li><br></li>
+        </ul>
+    </script>
 </div>
     <script src="javascripts/lib/jquery-1.6.1.min.js"></script>
     <script src="javascripts/bootstrap.min.js"></script>
     <script src="javascripts/lib/mustache.js"></script>
     <script src="javascripts/app.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            getDataFromServer(function(data) {
+                substituteContentInList(data);
+            });
+            $("#addToDo").click(onClickAddToDo);
+            $("#formToDo").submit(onClickAddToDo);
+        });
+    </script>
 </body>
 </html>

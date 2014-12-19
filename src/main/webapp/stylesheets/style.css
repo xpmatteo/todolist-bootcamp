@@ -24,3 +24,9 @@ input[type="text"] {
 .wrpListToDo{
   list-style: none;
 }
+
+.checkbox{
+  float: left;
+  width: 2em;
+  height: 1em;
+}
