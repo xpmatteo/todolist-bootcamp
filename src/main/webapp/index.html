@@ -10,7 +10,18 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-lg-12" id="containerList"></div>
+        <div class="col-lg-12" id="containerList">
+            <br>
+        </div>
+
+        <!--<div class="col-lg-12">
+            <div class="col-lg-4">
+                <h3>My Lists</h3>
+            </div>
+            <div class="col-lg-4">
+                <a class="btn createListsBtn">Create a new list</a>
+            </div>
+        </div>-->
 
     </div>
     <div class="row">
@@ -30,7 +41,7 @@
             {{#toDos}}
             <li>
                 <div>
-                    <input id ="{{text}}" class="checkbox" type="checkbox" name="{{text}}" value="{{text}}">
+                    <input id ="{{text}}" class="customCheck" type="checkbox" name="{{text}}" value="{{text}}">
                     <label for="{{text}}">{{text}}</label>
                 </div>
             </li>
@@ -38,19 +49,50 @@
             <li><br></li>
         </ul>
     </script>
+
+    <script id="summaryToDoLists" type="text/template">
+        <div class="container-lg-height">
+            <div class="col-lg-6 col-lg-height">
+                <h3>My Lists</h3>
+            </div>
+            <div class="col-lg-6 col-lg-height">
+                <a class="btn btn-default createListsBtn">Create a new list</a>
+            </div>
+        </div>
+        <h6 class="titleMyLists">MY LISTS</h6>
+        <ul>
+            <li>
+                <a href="#" class="itemsMyLists">Cose Da imparare per la lezione 6</a>
+                <span>-3 left</span>
+            </li>
+            <li>
+                <a href="#" class="itemsMyLists">Cose Da imparare per la lezione 6</a>
+                <span>-3 left</span>
+            </li>
+        </ul>
+    </script>
+
+    <script id="listsSummary" type="text/template">
+        <a class="btn crateListsBtn">Create a new list</a>
+        <!--<ul class="wrpListToDo">
+            {{#toDos}}
+            <li>
+                <div>
+                    <input id ="{{text}}" class="checkbox" type="checkbox" name="{{text}}" value="{{text}}">
+                    <label for="{{text}}">{{text}}</label>
+                </div>
+            </li>
+            {{/toDos}}
+            <li><br></li>
+        </ul>-->
+    </script>
+
 </div>
     <script src="javascripts/lib/jquery-1.6.1.min.js"></script>
     <script src="javascripts/bootstrap.min.js"></script>
     <script src="javascripts/lib/mustache.js"></script>
+    <script src="javascripts/main.js"></script>
     <script src="javascripts/app.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            getDataFromServer(function(data) {
-                substituteContentInList(data);
-            });
-            $("#addToDo").click(onClickAddToDo);
-            $("#formToDo").submit(onClickAddToDo);
-        });
-    </script>
+
 </body>
 </html>

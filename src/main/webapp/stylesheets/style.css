@@ -1,3 +1,77 @@
+
+.container-xs-height {
+  display:table;
+  padding-left:0px;
+  padding-right:0px;
+}
+.row-xs-height {
+  display:table-row;
+}
+.col-xs-height {
+  display:table-cell;
+  float:none;
+}
+@media (min-width: 768px) {
+  .container-sm-height {
+    display:table;
+    padding-left:0px;
+    padding-right:0px;
+  }
+  .row-sm-height {
+    display:table-row;
+  }
+  .col-sm-height {
+    display:table-cell;
+    float:none;
+  }
+}
+@media (min-width: 992px) {
+  .container-md-height {
+    display:table;
+    padding-left:0px;
+    padding-right:0px;
+  }
+  .row-md-height {
+    display:table-row;
+  }
+  .col-md-height {
+    display:table-cell;
+    float:none;
+  }
+}
+@media (min-width: 1200px) {
+  .container-lg-height {
+    display:table;
+    padding-left:0px;
+    padding-right:0px;
+  }
+  .row-lg-height {
+    display:table-row;
+  }
+  .col-lg-height {
+    display:table-cell;
+    float:none;
+  }
+}
+
+/* firefox fix */
+.img-responsive {
+  width: 100%;
+}
+
+/* vertical alignment styles */
+.col-top {
+  vertical-align:top;
+}
+.col-middle {
+  vertical-align:middle;
+}
+.col-bottom {
+  vertical-align:bottom;
+}
+
+
+
 body {
   font-family: arial, sans-serif;
   font-size: 10pt;
@@ -21,12 +95,24 @@ input[type="text"] {
   width: 45em;
 }
 
-.wrpListToDo{
+.wrpListToDo {
   list-style: none;
 }
 
-.checkbox{
+.checkbox {
   float: left;
   width: 2em;
   height: 1em;
+}
+
+.createListsBtn {
+  width: 200px;
+}
+
+.titleMyLists{
+  border-bottom: thin solid #ca3a11;
+}
+
+.itemsMyLists{
+  font-size: 20px;
 }

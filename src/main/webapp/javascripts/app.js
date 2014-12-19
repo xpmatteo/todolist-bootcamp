@@ -14,19 +14,28 @@ function onClickAddToDoError(data) {
 }
 
 function onClickAddToDo() {
-    console.log("click " + $('#formToDo').serialize());
-
-    $.ajax({
-        type: "POST",
-        url: "//localhost:8080/todolists/1",
-        data: $('#formToDo').serialize(),
-        success: onClickAddToDoSuccess,
-        error: onClickAddToDoError,
-    });
-    return false;
+    if ($('#formToDo').val() != "") {
+        $.ajax({
+            type: "POST",
+            url: "//localhost:8080/todolists/1",
+            data: $('#formToDo').serialize(),
+            success: onClickAddToDoSuccess,
+            error: onClickAddToDoError
+        });
+        return false;
+    }else{
+        alert("Inserire il toDo");
+    }
 }
 
 function getDataFromServer(callback) {
     $.getJSON('//localhost:8080/todolists/1', callback);
 }
 
+function checkboxStatus() {
+    if($(this).prop("checked") == false){
+        $(this).next().css("text-decoration","");
+    }else{
+        $(this).next().css("text-decoration","line-through");
+    }
+}
