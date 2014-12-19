@@ -18,7 +18,7 @@ function onClickAddToDo() {
 
     $.ajax({
         type: "POST",
-        url: "//localhost:8080/addToDo",
+        url: "//localhost:8080/todolists/1",
         data: $('#formToDo').serialize(),
         success: onClickAddToDoSuccess,
         error: onClickAddToDoError,
@@ -27,6 +27,6 @@ function onClickAddToDo() {
 }
 
 function getDataFromServer(callback) {
-    $.getJSON('//localhost:8080/list', callback);
+    $.getJSON('//localhost:8080/todolists/1', callback);
 }
 
