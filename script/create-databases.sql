@@ -2,10 +2,10 @@
 
 # define key information
 src=src/main/sql
-dbname=xxx_development
-dbname_test=xxx_test
-dbuser=xxx
-dbpassword=xxx
+dbname=todolist_development
+dbname_test=todolist_test
+dbuser=todolist
+dbpassword=todolist
 
 # no customization needed beyond this line
 cd "$(dirname $0)/.."
